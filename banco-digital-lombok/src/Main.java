@@ -2,35 +2,42 @@ import com.dio.banco.*;
 
 public class Main {
     public static void main(String[] args) {
-        Cliente maria = new Cliente();
-        maria.setNome("Maria Fernanda Ribeiro");
 
-        Conta ccMaria = new ContaCorrente(maria);
-        Conta cpMaria = new ContaPoupanca(maria);
+        Client cliente1 = new Client();
+        cliente1.setFirstName("Maria Fernanda");
+        cliente1.setLastName("Ribeiro");
+        cliente1.setCpf("234.568.123-67");
 
-        ccMaria.extratoConta();
-        cpMaria.extratoConta();
+        Account ccCliente1 = new CheckingAccount(cliente1);
+        Account cpCliente1 = new SavingsAccount(cliente1);
 
-        ccMaria.depositar(200);
+        System.out.println("*** Extratos Iniciais das Contas Corrente e Poupança ***");
+        ccCliente1.extractAccount();
+        cpCliente1.extractAccount();
 
-        ccMaria.extratoConta();
-        cpMaria.extratoConta();
-        ccMaria.transferir(100, cpMaria);
+        System.out.println("\nDepósito na Conta Corrente");
+        ccCliente1.deposit(200);
+        ccCliente1.extractAccount();
+        cpCliente1.extractAccount();
 
-        ccMaria.extratoConta();
-        cpMaria.extratoConta();
-        cpMaria.sacar(30);
+        System.out.println("\nTransferência para a Conta Poupança");
+        ccCliente1.transfer(100, cpCliente1);
+        ccCliente1.extractAccount();
+        cpCliente1.extractAccount();
 
-        ccMaria.extratoConta();
-        cpMaria.extratoConta();
-        ccMaria.setBoleto(50);
+        System.out.println("\nSaque na Conta Poupança");
+        cpCliente1.withdraw(30);
+        ccCliente1.extractAccount();
+        cpCliente1.extractAccount();
 
-        ccMaria.extratoConta();
-        cpMaria.extratoConta();
-        ccMaria.setBoleto(0);
-        ccMaria.pagarBoleto(50);
+        System.out.println("\nRecebimento de Conta para Pagamento");
+        ccCliente1.setBill(50);
+        ccCliente1.extractAccount();
+        cpCliente1.extractAccount();
 
-        ccMaria.extratoConta();
-        cpMaria.extratoConta();
+        System.out.println("\nPagamento da Conta pela Conta Corrente");
+        ccCliente1.payBill(50);
+        ccCliente1.extractAccount();
+        cpCliente1.extractAccount();
     }
 }
